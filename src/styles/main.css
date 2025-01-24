@@ -1,0 +1,52 @@
+/* Variables globales */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --accent-color: #3b82f6;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #06b6d4;
+  --light-color: #f3f4f6;
+  --dark-color: #1f2937;
+  --border-radius: 0.5rem;
+  --transition: all 0.3s ease;
+}
+
+/* Styles de base */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+/* Mode sombre */
+.dark-mode {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Layout */
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  margin-top: 80px;
+}
+
+/* Composants */
+.card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.dark-mode .card {
+  background: #1e293b;
+}
+
+/* ... autres styles ... */

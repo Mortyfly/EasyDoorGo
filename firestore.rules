@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Fonction helper pour vérifier l'authentification
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Fonction helper pour vérifier si l'utilisateur accède à ses propres données
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Collection users et sous-collections
+    match /users/{userId} {
+      // Accès aux données de base de l'utilisateur
+      match /profile/{document} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      // Progression et succès
+      match /progress/{document} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      match /achievements/{document} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      // Sessions de jeu
+      match /sessions/{document} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Paramètres et statuts
+      match /settings/{document=**} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Villes et adresses
+      match /cities/{document} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      match /addresses/{document} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Succès disponibles (global)
+    match /achievements/{achievementId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Seul l'admin peut modifier les succès
+    }
+  }
+}
